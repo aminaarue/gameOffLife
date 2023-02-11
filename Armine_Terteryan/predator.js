@@ -1,10 +1,5 @@
-class Predator {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.energy = 30;
-        this.directions = [];
-    }
+class Predator  extends LivingCreature {
+    
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -18,20 +13,11 @@ class Predator {
         ];
     }
     chooseCell(character) { // empty cells array [[1,2], [2,4]]
-        let found = [] //
-        for (let i in this.directions) {
-            let x = this.directions[i][0]
-            let y = this.directions[i][1]
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) { //
-                    found.push(this.directions[i])
-                }
-            }
-        }
-        return found
+        this.getNewCoordinates()
+        return super.chooseCell(character)
     }
     eat() {
-        this.getNewCoordinates()
+       
         let allGrasses = this.chooseCell(1)
         let allGrassEaters = this.chooseCell(2)
         let all = allGrasses.concat(allGrassEaters)
@@ -67,7 +53,7 @@ class Predator {
 
         if (this.energy > 0) {
             this.energy--
-            this.getNewCoordinates()
+           
             let allEmptyCells = this.chooseCell(0)
             let oneEmptyCell = random(allEmptyCells)
             if (oneEmptyCell) {
@@ -81,14 +67,14 @@ class Predator {
 
             }
         }
-        else{
+        else {
             this.die()
         }
     }
-    die(){
+    die() {
         matrix[this.y][this.x] = 0;
-        for(var i in predatorArr){
-            if(this.x == predatorArr[i].x && this.y == predatorArr[i].y){
+        for (var i in predatorArr) {
+            if (this.x == predatorArr[i].x && this.y == predatorArr[i].y) {
                 predatorArr.slice(i, 1)
 
                 break;
@@ -96,14 +82,14 @@ class Predator {
             }
         }
     }
-    mul(){
-        if(this.energy>12){
+    mul() {
+        if (this.energy > 12) {
             var newCell = random(this.chooseCell(0));
-            if(newCell){
+            if (newCell) {
                 var newPredator = new Predator(newCell[0], newCell[1])
-          predatorArr.push(newPredator);
-                matrix[newCell[1]] [newCell[2]]  = 2;
-                this.energy= this.energy - 10
+                predatorArr.push(newPredator);
+                matrix[newCell[1]][newCell[2]] = 2;
+                this.energy = this.energy - 10
             }
         }
     }

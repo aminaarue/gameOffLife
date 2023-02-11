@@ -5,6 +5,7 @@ class Fire {
         this.energy = 50;
         this.directions = [];
     }
+
     mul() {
         let found = this.chooseCell(0);
         let exact = random(found)

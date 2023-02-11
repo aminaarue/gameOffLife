@@ -46,7 +46,7 @@ function setup() {
 
 
     }
-    matrixGenerator(20, 5, 5, 5, 5, 5)
+    matrixGenerator(20, 10, 5, 7, 5, 5)
     createCanvas(matrix[0].length * side, matrix.length * side);
 
 
@@ -122,7 +122,9 @@ function draw() {
     for (let i = 0; i < grassEaterArr.length; i++) {
         grassEaterArr[i].eat()
     }
-
+    for (let i = 0; i < grassEaterArr.length; i++) {
+        grassEaterArr[i].mul()
+    }
     for (let i = 0; i < predatorArr.length; i++) {
         predatorArr[i].move()
 
